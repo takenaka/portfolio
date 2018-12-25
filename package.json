@@ -5,9 +5,9 @@
   "author": "Yuki Takenaka",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "dev": "cross-env NODE_ENV=development nodemon src/server/index.js --watch server",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/index.js",
+    "start": "cross-env NODE_ENV=production node src/server/index.js",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -18,11 +18,14 @@
     "@nuxtjs/axios": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0",
+    "@types/node": "^10.12.17",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "2.6.2",
+    "nodemon": "^1.11.0",
     "prettier": "1.14.3",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.2"
   }
 }
