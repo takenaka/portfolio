@@ -5,6 +5,7 @@
     "strict": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
     "noImplicitThis": true,
     "allowJs": true,

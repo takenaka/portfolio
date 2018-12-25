@@ -4,12 +4,12 @@ import colors from 'vuetify/es5/util/colors'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#121212', // a color that is not in the material colors palette
-    accent: colors.grey.darken3,
-    secondary: colors.amber.darken3,
-    info: colors.teal.lighten1,
-    warning: colors.amber.base,
-    error: colors.deepOrange.accent4,
-    success: colors.green.accent3
+    primary: '#299DCB', // a color that is not in the material colors palette
+    accent: '#6A7FDB',
+    secondary: '#45CB85',
+    info: '#6DD6DA',
+    warning: 'F7EE7F',
+    error: '#E08DAC',
+    success: '#57E2E5'
   }
 })
