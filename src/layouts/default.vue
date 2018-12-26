@@ -65,15 +65,13 @@ export default class extends Vue {
           Takenaka's Works
         </nuxt-link>
       </v-toolbar-title>
-      <v-spacer />
-      <v-toolbar-items>
-        <v-img :src="'/img/logo.jpeg'" height="56px" width="56px"></v-img>
-      </v-toolbar-items>
     </v-toolbar>
     <v-toolbar app></v-toolbar>
     <v-content>
       <v-container fluid>
-        <nuxt />
+        <v-fade-transition hide-on-leave>
+          <router-view />
+        </v-fade-transition>
       </v-container>
     </v-content>
     <v-footer app></v-footer>
@@ -87,5 +85,8 @@ export default class extends Vue {
 }
 .v-toolbar__content, .v-toolbar__extension {
   padding-right: 0;
+}
+nav {
+  background: linear-gradient(-135deg, #6DD6DA, #299DCB);
 }
 </style>
