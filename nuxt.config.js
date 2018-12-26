@@ -50,6 +50,7 @@ module.exports = {
    ** Global CSS
    */
   css: [
+    'normalize.css',
     '~/assets/style/app.styl',
     '~/assets/style/app.scss'
   ],
