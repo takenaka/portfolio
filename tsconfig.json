@@ -6,13 +6,16 @@
     "module": "esnext",
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
+    "strictFunctionTypes": false,
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "lib": ["esnext", "dom"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./*"]
     },
     "rootDir": "./",
     "outDir": ".nuxt"

@@ -1,9 +1,8 @@
 const pkg = require('./package')
 const extendConfig = require('./webpack.config.extend');
-
 module.exports = {
   mode: 'universal',
-  srcDir: 'src/',
+  srcDir: './src',
 
   /*
    ** Headers of the page
@@ -66,15 +65,15 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    ['@nuxtjs/dotenv', {
+      path: './'
+    }],
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios'
   ],
   /*
    ** Axios module configuration
    */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-  },
 
   /*
    ** Build configuration

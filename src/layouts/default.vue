@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { Action, Getter, State } from 'vuex-class'
 
 @Component
@@ -74,7 +74,13 @@ export default class extends Vue {
         </v-fade-transition>
       </v-container>
     </v-content>
-    <v-footer app></v-footer>
+    <!-- <v-footer
+      app
+      class="pa-3"
+    >
+      <v-spacer></v-spacer>
+      <div class="caption">&copy; {{ new Date().getFullYear() }} - Yuki Takenaka</div>
+    </v-footer> -->
   </v-app>
 </template>
 
@@ -83,10 +89,11 @@ export default class extends Vue {
   text-decoration: none;
   color: white;
 }
-.v-toolbar__content, .v-toolbar__extension {
+.v-toolbar__content,
+.v-toolbar__extension {
   padding-right: 0;
 }
 nav {
-  background: linear-gradient(-135deg, #6DD6DA, #299DCB);
+  background: linear-gradient(-135deg, #6dd6da, #299dcb);
 }
 </style>
