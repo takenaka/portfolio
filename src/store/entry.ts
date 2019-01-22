@@ -1,14 +1,29 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import { createClient, Entry } from 'contentful'
-import { MutationTree, ActionTree } from 'vuex'
+import { MutationTree, ActionTree, GetterTree } from 'vuex'
+import marked from 'marked';
 
 export interface IState {
-  entry: Entry<{}> | {}
+  entry: Entry<any> | {}
 }
 
 export const state = (): IState => ({
   entry: {}
 })
+
+export const getters: GetterTree<IState, any> = {
+  getBody: state => {
+    let text = '';
+
+    const entry = state.entry as Entry<any>;
+    if (entry.fields && entry.fields.body) {
+      const body = entry.fields.body;
+      text = body;
+    }
+
+    return marked(text);
+  }
+}
 
 export const mutations: MutationTree<IState> = {
   SET_ENTRY: (state, value: Entry<{}>) => {
@@ -17,9 +32,7 @@ export const mutations: MutationTree<IState> = {
 }
 
 export const actions: ActionTree<IState, any> = {
-  async getEntry(this: Vue, { commit, rootState }, data: {
-    id: string
-  }) {
+  async getEntry(this: Vue, { commit, rootState }, permalink: string) {
     try {
       const client = createClient({
         space: process.env.CTF_SPACE_ID ? process.env.CTF_SPACE_ID : '',
@@ -28,13 +41,16 @@ export const actions: ActionTree<IState, any> = {
           : ''
       })
 
-      const response = await client.getEntry(data.id);
+      const response = await client.getEntries({
+        'content_type': process.env.CTF_CONTENT_TYPE,
+        'fields.permalink': permalink
+      })
 
-      commit('SET_ENTRY', response)
+      commit('SET_ENTRY', response.items[0])
 
       return true
     } catch {
-      false
+      return false
     }
   }
 }

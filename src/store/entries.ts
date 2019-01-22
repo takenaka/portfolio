@@ -26,7 +26,9 @@ export const actions: ActionTree<IState, any> = {
           : ''
       })
 
-      const response = await client.getEntries()
+      const response = await client.getEntries({
+        order: '-sys.updatedAt'
+      })
 
       commit('SET_ENTRIES', response)
     } catch({ response }) {
