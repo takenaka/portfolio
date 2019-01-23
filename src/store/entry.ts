@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { createClient, Entry } from 'contentful'
 import { MutationTree, ActionTree, GetterTree } from 'vuex'
-import marked from 'marked';
+import marked from 'marked'
 
 export interface IState {
   entry: Entry<any> | {}
@@ -13,15 +13,15 @@ export const state = (): IState => ({
 
 export const getters: GetterTree<IState, any> = {
   getBody: state => {
-    let text = '';
+    let text = ''
 
-    const entry = state.entry as Entry<any>;
+    const entry = state.entry as Entry<any>
     if (entry.fields && entry.fields.body) {
-      const body = entry.fields.body;
-      text = body;
+      const body = entry.fields.body
+      text = body
     }
 
-    return marked(text);
+    return marked(text)
   }
 }
 
@@ -42,7 +42,7 @@ export const actions: ActionTree<IState, any> = {
       })
 
       const response = await client.getEntries({
-        'content_type': process.env.CTF_CONTENT_TYPE,
+        content_type: process.env.CTF_CONTENT_TYPE,
         'fields.permalink': permalink
       })
 

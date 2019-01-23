@@ -12,19 +12,31 @@ export default class extends Vue {
   async fetch({ store, params }) {
     await store.dispatch('entry/getEntry', params.permalink);
   }
+
+  async mounted() {
+    const source = await fetch('//cdn.embedly.com/widgets/platform.js', {})
+    const s = await source.text()
+    const key = s.match(/\.EMB_API_KEY="([^"]*)"/)
+    console.log(key![1])
+  }
 }
 </script>
 
 <template>
-  <v-layout justify-center align-center wrap>
-    <v-flex sm12 md8>
-      <div class="article-body" v-html="getBody"></div>
+  <v-layout align-center justify-center wrap>
+    <v-flex md8 sm12>
+      <h1 class="entry-title">{{ entry.entry.fields.title }}</h1>
+      <v-img :src="`https:${entry.entry.fields.headerImage.fields.file.url}`" height="200"></v-img>
+      <div class="entry-body" v-html="getBody"></div>
     </v-flex>
   </v-layout>
 </template>
 
 <style lang="scss" scoped>
-.article-body {
+.entry-title {
+  word-break: break-all;
+}
+.entry-body {
   word-wrap: 'break-word';
   width: 100%;
   overflow: hidden;
