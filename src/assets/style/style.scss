@@ -1,5 +1,7 @@
 p {
-  margin: 1em 0; }
+  margin: 1em 0;
+  max-width: 100%;
+ }
 
 table {
   border-collapse: collapse;
@@ -199,3 +201,20 @@ dt {
 dd {
   margin-bottom: 1em;
   margin-left: 1.5em; }
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  iframe .card{
+  width: 490px !important;
+  }
+  }
+
+  @media screen and (max-width: 480px) {
+  iframe.embedly-card {
+  width: 450px !important;
+  margin:0 auto;/*これを入れないとめっちゃ細く200pxくらいで表示されます。以下イメージあり！*/
+  }
+  }
+
+  .timeline-Widget {
+  max-width: 300px!important;
+  width:200px !important; }
