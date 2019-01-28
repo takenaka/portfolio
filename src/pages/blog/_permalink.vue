@@ -5,26 +5,13 @@ import { NuxtContext } from '@/@types/nuxt';
 import { IState } from '@/store/entry';
 import Embed from '@/plugins/embed'
 import { Entry } from 'contentful';
-import ShapingEmbedHTML from '@/models/client/ShapingEmbedHTML'
 
 @Component
 export default class extends Vue {
   @State('entry') entry: IState;
-  @Action('entry/setBody') setBody: (html: string) => boolean
-  @Getter('entry/getApiKey') apiKey: Promise<string>;
 
   async fetch({ store, params }) {
     await store.dispatch('entry/getEntry', params.permalink);
-  }
-
-  async mounted() {
-    const entry = this.entry.entry as Entry<any>;
-    const shaping = new ShapingEmbedHTML(entry.fields.body, await this.apiKey);
-    const html = await shaping.getHtml();
-
-    if (html) {
-      this.setBody(html);
-    }
   }
 }
 </script>
@@ -44,7 +31,6 @@ export default class extends Vue {
 </template>
 
 <style lang="scss" src="@/assets/style/style.scss"></style>
-<style lang="scss" src="@/assets/style/card.scss"></style>
 
 <style lang="scss" scoped>
 .entry-title {

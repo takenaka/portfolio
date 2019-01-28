@@ -2,9 +2,6 @@ import Vue from 'vue'
 import { createClient, Entry } from 'contentful'
 import { MutationTree, ActionTree, GetterTree } from 'vuex'
 import marked from 'marked'
-import Axios from 'axios'
-import Embed from '@/plugins/embed'
-
 export interface IState {
   entry: Entry<any> | {}
 }
@@ -13,28 +10,9 @@ export const state = (): IState => ({
   entry: {}
 })
 
-export const getters: GetterTree<IState, any> = {
-  async getApiKey(this: Vue) {
-    try {
-      const source = await Axios.get<string>(
-        'https://cdn.embedly.com/widgets/platform.js'
-      )
-      const key = source.data.match(/\.EMB_API_KEY="([^"]*)"/)
-
-      return key ? key[1] : ''
-    } catch (error) {
-      return false
-    }
-  }
-}
-
 export const mutations: MutationTree<IState> = {
   SET_ENTRY: (state, value: Entry<{}>) => {
     state.entry = value
-  },
-  SET_BODY: (state, value: string) => {
-    const entry = state.entry as Entry<any>;
-    entry.fields.body = value;
   }
 }
 
@@ -71,10 +49,5 @@ export const actions: ActionTree<IState, any> = {
     } catch {
       return false
     }
-  },
-  setBody(this: Vue, {commit}, html: string) {
-    commit('SET_BODY', html);
-
-    return true;
   }
 }

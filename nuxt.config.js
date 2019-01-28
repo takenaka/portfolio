@@ -22,6 +22,9 @@ module.exports = {
         content: pkg.description
       }
     ],
+    script: [
+      { src: 'https://cdn.embedly.com/widgets/platform.js' }
+    ],
     link: [{
         rel: 'icon',
         type: 'image/x-icon',
