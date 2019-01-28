@@ -9,7 +9,13 @@ table {
 th,
 td {
   border-bottom: 1px solid #ccc;
-  padding: 0.75em 0.5em; }
+  padding: 0.75em 0.5em;
+
+  img {
+    height: 16em;
+    object-fit: contain;
+  }
+ }
 
 th {
   background-color: #eee;
