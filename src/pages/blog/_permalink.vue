@@ -3,7 +3,6 @@ import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { Action, Getter, State } from 'vuex-class'
 import { NuxtContext } from '@/@types/nuxt';
 import { IState } from '@/store/entry';
-import Embed from '@/plugins/embed'
 import { Entry } from 'contentful';
 
 @Component
