@@ -1,5 +1,16 @@
 const pkg = require('./package')
+const { getConfigForKeys } = require('./src/lib/config.js')
 const extendConfig = require('./webpack.config.extend');
+
+const ctfConfig = getConfigForKeys([
+  'CTF_BLOG_POST_TYPE_ID',
+  'CTF_SPACE_ID',
+  'CTF_CDA_ACCESS_TOKEN'
+])
+
+const { createClient } = require('./src/plugins/contentful')
+const cdaClient = createClient(ctfConfig)
+
 module.exports = {
   mode: 'universal',
   srcDir: './src',
@@ -56,6 +67,22 @@ module.exports = {
     '~/assets/style/app.styl',
     '~/assets/style/app.scss'
   ],
+
+  generate: {
+    routes() {
+      return cdaClient
+        .getEntries(ctfConfig.CTF_BLOG_POST_TYPE_ID)
+        .then(entries => {
+          return [...entries.items.map(entry => `/blog/${entry.fields.permalink}`)]
+        })
+    }
+  },
+
+  env: {
+    CTF_SPACE_ID: ctfConfig.CTF_SPACE_ID,
+    CTF_CDA_ACCESS_TOKEN: ctfConfig.CTF_CDA_ACCESS_TOKEN,
+    CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID
+  },
 
   /*
    ** Plugins to load before mounting the App
