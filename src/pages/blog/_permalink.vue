@@ -10,6 +10,7 @@ export default class extends Vue {
   @State('entry') entry: IState;
 
   async fetch({ store, params }) {
+    console.log(params)
     await store.dispatch('entry/getEntry', params.permalink);
   }
 }

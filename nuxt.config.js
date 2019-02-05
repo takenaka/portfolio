@@ -5,7 +5,8 @@ const extendConfig = require('./webpack.config.extend');
 const ctfConfig = getConfigForKeys([
   'CTF_BLOG_POST_TYPE_ID',
   'CTF_SPACE_ID',
-  'CTF_CDA_ACCESS_TOKEN'
+  'CTF_CDA_ACCESS_TOKEN',
+  'CTF_CONTENT_TYPE'
 ])
 
 const { createClient } = require('./src/plugins/contentful')
@@ -81,7 +82,8 @@ module.exports = {
   env: {
     CTF_SPACE_ID: ctfConfig.CTF_SPACE_ID,
     CTF_CDA_ACCESS_TOKEN: ctfConfig.CTF_CDA_ACCESS_TOKEN,
-    CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID
+    CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID,
+    CTF_CONTENT_TYPE: ctfConfig.CTF_CONTENT_TYPE
   },
 
   /*
