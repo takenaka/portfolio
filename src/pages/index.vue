@@ -22,47 +22,34 @@ export default class extends Vue {
 </script>
 
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-xs-center">
-        <v-avatar
-          color="grey lighten-4"
-          size="256px"
-        >
-          <img
-            src="/img/logo.jpeg"
-            alt="avatar"
-          >
+  <div>
+    <v-layout align-center justify-center>
+      <v-flex md6 sm8 xs12 class="text-xs-center">
+        <v-avatar color="grey lighten-4" size="256px">
+          <img alt="avatar" src="/img/logo.jpeg">
         </v-avatar>
+      </v-flex>
+    </v-layout>
+    <v-layout align-center justify-center>
+      <v-flex md6 sm8 xs12>
         <v-card class="mt-4 pa-2">
           <v-card-text>
-            <div
-              v-for="(profile, index) in profiles"
-              :key="index"
-            >
-              <v-text-field
-                readonly
-                :label="profile.title"
-                v-model="profile.content"
-              ></v-text-field>
+            <div :key="index" v-for="(profile, index) in profiles">
+              <v-text-field :label="profile.title" readonly v-model="profile.content"></v-text-field>
             </div>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn fab small color="primary" href="https://twitter.com/y_takenyaka">
+            <v-btn color="primary" fab href="https://twitter.com/y_takenyaka" small>
               <v-icon>mdi-twitter</v-icon>
             </v-btn>
+            <v-btn dark color="grey" fab href="https://github.com/takenaka0919" small>
+              <v-icon>mdi-github-circle</v-icon>
+            </v-btn>
           </v-card-actions>
+          <v-img src="https://grass-graph.moshimo.works/images/takenaka0919.png"></v-img>
         </v-card>
-      </div>
-    </v-flex>
-  </v-layout>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
