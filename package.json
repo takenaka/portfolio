@@ -1,7 +1,7 @@
 {
-  "name": "jam-ts",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "JAM-Stack typescript.",
+  "description": "My portfolio",
   "author": "Yuki Takenaka",
   "private": true,
   "scripts": {
