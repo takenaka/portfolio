@@ -43,11 +43,11 @@ export default class extends Vue {
             <v-btn color="primary" fab href="https://twitter.com/y_takenyaka" small>
               <v-icon>mdi-twitter</v-icon>
             </v-btn>
-            <v-btn dark color="grey" fab href="https://github.com/takenaka0919" small>
+            <v-btn dark color="grey" fab href="https://github.com/takenaka" small>
               <v-icon>mdi-github-circle</v-icon>
             </v-btn>
           </v-card-actions>
-          <v-img src="https://grass-graph.moshimo.works/images/takenaka0919.png"></v-img>
+          <v-img src="https://grass-graph.moshimo.works/images/takenaka.png"></v-img>
         </v-card>
       </v-flex>
     </v-layout>
