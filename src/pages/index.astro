@@ -1,0 +1,677 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+
+const year = new Date().getFullYear();
+
+const clientPayload = {
+  domain: siteConfig.domain,
+  author: siteConfig.author,
+  contact: siteConfig.contact,
+  channels: siteConfig.channels,
+};
+---
+
+<Layout title={siteConfig.title} description={siteConfig.description}>
+  <!-- Top System Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand" aria-label={siteConfig.domain}>
+        <img
+          src="/favicon.svg"
+          alt="竹"
+          width="22"
+          height="22"
+          class="brand-mark"
+        />
+        <span>{siteConfig.domain}</span>
+        <span class="brand-branch">main</span>
+      </a>
+
+      <div class="topbar-meta">
+        <span class="status-pill" title="Current availability status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>{siteConfig.author.status}</span>
+        </span>
+        <span class="clock" id="jst-clock" aria-label="Japan Standard Time">JST --:--:--</span>
+        <button
+          type="button"
+          class="icon-btn"
+          id="focus-term-btn"
+          title="Focus terminal (Shortcut: /)"
+        >
+          <span>&gt;_</span>
+          <span>/</span>
+        </button>
+        <button
+          type="button"
+          class="icon-btn"
+          id="theme-toggle"
+          aria-label="Toggle color theme"
+          title="Toggle dark / light theme"
+        >
+          <span id="theme-label">DARK</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- Pane 01: Identity -->
+    <section class="pane" aria-labelledby="identity-heading">
+      <div class="pane-header">
+        <span class="pane-title">
+          <span class="pane-index">01</span>
+          <span>// IDENTITY</span>
+        </span>
+        <span class="pane-cmd">$ whoami &amp;&amp; neofetch --short</span>
+      </div>
+
+      <div class="pane-body">
+        <div class="hero-grid">
+          <div class="avatar-frame">
+            <div class="avatar-wrap">
+              <img
+                src={siteConfig.author.avatar}
+                alt={`${siteConfig.author.name} monogram logo`}
+                width="164"
+                height="164"
+                class="avatar-img"
+              />
+            </div>
+            <div class="avatar-meta">
+              <span>LOGO.JPG</span>
+              <span>16×16PX</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="identity-kicker">
+              // {siteConfig.author.handle}@{siteConfig.domain}
+            </p>
+            <h1 class="identity-name" id="identity-heading">
+              {siteConfig.author.name}<span class="cursor-block" aria-hidden="true"></span>
+            </h1>
+            <p class="identity-bio">{siteConfig.author.bio}</p>
+
+            <dl class="spec-grid">
+              <div class="spec-item">
+                <dt class="spec-key">Role</dt>
+                <dd class="spec-val">{siteConfig.author.role}</dd>
+              </div>
+              <div class="spec-item">
+                <dt class="spec-key">Location</dt>
+                <dd class="spec-val">{siteConfig.author.location}</dd>
+              </div>
+              <div class="spec-item">
+                <dt class="spec-key">Host</dt>
+                <dd class="spec-val">{siteConfig.domain}</dd>
+              </div>
+              <div class="spec-item">
+                <dt class="spec-key">X (Twitter)</dt>
+                <dd class="spec-val">@y_takenyaka</dd>
+              </div>
+              <div class="spec-item">
+                <dt class="spec-key">GitHub</dt>
+                <dd class="spec-val">@takenaka</dd>
+              </div>
+              <div class="spec-item">
+                <dt class="spec-key">Coords</dt>
+                <dd class="spec-val">{siteConfig.author.coordinates}</dd>
+              </div>
+            </dl>
+
+            <div class="hero-actions">
+              <a
+                href="https://x.com/y_takenyaka"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                <span>$ contact @y_takenyaka</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                href="https://github.com/takenaka"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+              >
+                <span>github.com/takenaka</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <button
+                type="button"
+                class="btn"
+                data-copy="@y_takenyaka"
+                data-copy-label="X Handle"
+              >
+                <span>copy @y_takenyaka</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom 2-Column Split: Contact Channels + Interactive Shell -->
+    <div class="split-grid" id="contact">
+      <!-- Pane 02: Channels -->
+      <section class="pane pane-flex" aria-labelledby="channels-heading">
+        <div class="pane-header">
+          <span class="pane-title" id="channels-heading">
+            <span class="pane-index">02</span>
+            <span>// CONTACT &amp; LINKS</span>
+          </span>
+          <span class="pane-cmd">$ ls -la ./channels</span>
+        </div>
+
+        <div class="pane-body pane-body-flex">
+          <div class="channel-list">
+            {
+              siteConfig.channels.map((ch) => (
+                <article class:list={['channel-card', { 'channel-card-primary': ch.primary }]}>
+                  <div class="channel-icon" aria-hidden="true">
+                    {ch.id === 'github' && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a10.97 10.97 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                      </svg>
+                    )}
+                    {ch.id === 'x' && (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    )}
+                    {ch.id === 'email' && (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="square"
+                      >
+                        <rect x="3" y="5" width="18" height="14" />
+                        <path d="M3 7l9 6 9-6" />
+                      </svg>
+                    )}
+                    {ch.id !== 'github' && ch.id !== 'x' && ch.id !== 'email' && (
+                      <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                    )}
+                  </div>
+
+                  <div class="channel-main">
+                    <div class="channel-top">
+                      <span class="channel-name">{ch.label}</span>
+                      <span class:list={['channel-proto', { 'channel-proto-primary': ch.primary }]}>
+                        {ch.protocol}
+                      </span>
+                    </div>
+                    <a
+                      href={ch.href}
+                      target={ch.external ? '_blank' : undefined}
+                      rel={ch.external ? 'noopener noreferrer' : undefined}
+                      class="channel-handle"
+                    >
+                      {ch.handle}
+                    </a>
+                    <p class="channel-desc">{ch.description}</p>
+                  </div>
+
+                  <div class="channel-actions">
+                    <button
+                      type="button"
+                      class="mini-btn"
+                      data-copy={ch.copyValue}
+                      data-copy-label={ch.label}
+                      title={`Copy ${ch.copyValue}`}
+                    >
+                      COPY
+                    </button>
+                    <a
+                      href={ch.href}
+                      target={ch.external ? '_blank' : undefined}
+                      rel={ch.external ? 'noopener noreferrer' : undefined}
+                      class="mini-btn"
+                      aria-label={`Open ${ch.label}`}
+                    >
+                      OPEN ↗
+                    </a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="channel-note">
+            <span>// {siteConfig.contact.responseNote}</span>
+            <span>TZ: UTC+09:00</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pane 03: Interactive Shell -->
+      <section class="pane pane-flex" aria-labelledby="shell-heading">
+        <div class="pane-header">
+          <span class="pane-title" id="shell-heading">
+            <span class="pane-index">03</span>
+            <span>// INTERACTIVE SHELL</span>
+          </span>
+          <span class="pane-cmd">[Tab] complete · [↑↓] history</span>
+        </div>
+
+        <div class="pane-body pane-body-flex">
+          <div class="terminal-chips" aria-label="Quick commands">
+            <button type="button" class="chip" data-cmd="help">help</button>
+            <button type="button" class="chip" data-cmd="whoami">whoami</button>
+            <button type="button" class="chip" data-cmd="neofetch">neofetch</button>
+            <button type="button" class="chip" data-cmd="contact">contact</button>
+            <button type="button" class="chip" data-cmd="ping">ping</button>
+            <button type="button" class="chip" data-cmd="theme">theme</button>
+            <button type="button" class="chip" data-cmd="clear">clear</button>
+          </div>
+
+          <div class="terminal-screen" id="terminal-screen" aria-live="polite">
+            <p class="term-line term-muted">
+              takenaka.work shell v2.0.0 — running on Cloudflare Edge
+            </p>
+            <p class="term-line term-muted">
+              Type <span class="term-prompt">help</span> to list commands, or click a chip above.
+            </p>
+          </div>
+
+          <form class="terminal-input-row" id="terminal-form" autocomplete="off">
+            <label for="terminal-input" class="term-prompt">takenaka@work:~$</label>
+            <input
+              id="terminal-input"
+              class="terminal-input"
+              type="text"
+              spellcheck="false"
+              autocapitalize="off"
+              placeholder="help"
+            />
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Vim / tmux Style Statusline -->
+  <footer class="statusline">
+    <div class="statusline-inner">
+      <div class="statusline-left">
+        <span class="mode-badge">NORMAL</span>
+        <span>{siteConfig.domain}</span>
+        <span>UTF-8</span>
+      </div>
+      <div class="statusline-right">
+        <span>HOSTED ON CLOUDFLARE</span>
+        <span>&copy; {year} {siteConfig.author.name}</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script define:vars={{ clientPayload }}>
+    (() => {
+      const config = clientPayload;
+      const root = document.documentElement;
+      const toastEl = document.getElementById('toast');
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeLabel = document.getElementById('theme-label');
+      const clockEl = document.getElementById('jst-clock');
+      const focusTermBtn = document.getElementById('focus-term-btn');
+      const terminalScreen = document.getElementById('terminal-screen');
+      const terminalForm = document.getElementById('terminal-form');
+      const terminalInput = document.getElementById('terminal-input');
+
+      // Toast helper
+      let toastTimer = null;
+      const showToast = (msg) => {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.dataset.visible = 'true';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastEl.dataset.visible = 'false';
+        }, 2200);
+      };
+
+      // Clipboard helper
+      const copyText = async (text, label = 'value') => {
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast(`COPIED // ${label}: ${text}`);
+          return true;
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(`COPIED // ${label}: ${text}`);
+          return true;
+        }
+      };
+
+      // Theme sync
+      const syncThemeLabel = () => {
+        const current = root.dataset.theme === 'light' ? 'light' : 'dark';
+        if (themeLabel) themeLabel.textContent = current.toUpperCase();
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', current === 'light' ? '#f1f4f8' : '#080a0e');
+        }
+      };
+
+      const toggleTheme = () => {
+        const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem('takenaka-theme', next);
+        } catch {}
+        syncThemeLabel();
+        showToast(`THEME // ${next.toUpperCase()}`);
+        return next;
+      };
+
+      syncThemeLabel();
+      themeToggle?.addEventListener('click', toggleTheme);
+
+      // Live JST Clock
+      const updateClock = () => {
+        if (!clockEl) return;
+        try {
+          const now = new Intl.DateTimeFormat('ja-JP', {
+            timeZone: 'Asia/Tokyo',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }).format(new Date());
+          clockEl.textContent = `JST ${now}`;
+        } catch {
+          clockEl.textContent = 'JST';
+        }
+      };
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // Copy buttons
+      document.querySelectorAll('[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const value = btn.getAttribute('data-copy');
+          const label = btn.getAttribute('data-copy-label') || 'value';
+          if (!value) return;
+          await copyText(value, label);
+          const original = btn.textContent;
+          btn.setAttribute('data-copied', 'true');
+          if (btn.classList.contains('mini-btn')) {
+            btn.textContent = 'DONE ✓';
+          }
+          setTimeout(() => {
+            btn.removeAttribute('data-copied');
+            if (btn.classList.contains('mini-btn') && original) {
+              btn.textContent = original;
+            }
+          }, 1500);
+        });
+      });
+
+      // Focus terminal button & '/' shortcut
+      const focusTerminal = () => {
+        terminalInput?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => terminalInput?.focus(), 180);
+      };
+      focusTermBtn?.addEventListener('click', focusTerminal);
+
+      document.addEventListener('keydown', (e) => {
+        const tag = document.activeElement?.tagName;
+        if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          focusTerminal();
+        }
+      });
+
+      // Interactive Terminal Engine
+      const history = [];
+      let historyIdx = -1;
+      const channelIds = config.channels.map((c) => c.id);
+      const commandNames = [
+        'help',
+        'whoami',
+        'neofetch',
+        'contact',
+        'links',
+        ...channelIds.map((id) => `open ${id}`),
+        ...channelIds.map((id) => `copy ${id}`),
+        'ping',
+        'date',
+        'ls',
+        'cat README.md',
+        'cat contact.json',
+        'theme',
+        'clear',
+      ];
+
+      const appendLine = (text, cls = '') => {
+        if (!terminalScreen) return;
+        const p = document.createElement('p');
+        p.className = `term-line ${cls}`.trim();
+        p.textContent = text;
+        terminalScreen.appendChild(p);
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+      };
+
+      const appendCommandEcho = (cmd) => {
+        if (!terminalScreen) return;
+        const p = document.createElement('p');
+        p.className = 'term-line';
+        const prompt = document.createElement('span');
+        prompt.className = 'term-prompt';
+        prompt.textContent = 'takenaka@work:~$ ';
+        p.appendChild(prompt);
+        p.appendChild(document.createTextNode(cmd));
+        terminalScreen.appendChild(p);
+      };
+
+      const appendLinkLine = (prefix, label, href) => {
+        if (!terminalScreen) return;
+        const p = document.createElement('p');
+        p.className = 'term-line';
+        p.appendChild(document.createTextNode(prefix));
+        const a = document.createElement('a');
+        a.className = 'term-link';
+        a.href = href;
+        a.textContent = label;
+        if (href.startsWith('http')) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+        p.appendChild(a);
+        terminalScreen.appendChild(p);
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+      };
+
+      const runCommand = async (raw) => {
+        const input = raw.trim();
+        if (!input) return;
+
+        history.push(input);
+        historyIdx = history.length;
+        appendCommandEcho(input);
+
+        const [cmd, ...rest] = input.split(/\s+/);
+        const arg = rest.join(' ').toLowerCase();
+
+        switch (cmd.toLowerCase()) {
+          case 'help':
+            appendLine('Available commands:', 'term-ok');
+            appendLine('  whoami           Print identity summary');
+            appendLine('  neofetch         Render stylized system profile');
+            appendLine('  contact / links  Show all contact channels');
+            appendLine(`  open <channel>   Open ${channelIds.join(' | ')}`);
+            appendLine(`  copy <channel>   Copy ${channelIds.join(' | ')}`);
+            appendLine('  ping             Check edge connectivity');
+            appendLine('  date             Print current JST & UTC time');
+            appendLine('  theme            Switch dark / light theme');
+            appendLine('  clear            Clear terminal output');
+            break;
+
+          case 'whoami':
+            appendLine(`${config.author.name} (${config.author.handle}) — ${config.author.role}`, 'term-ok');
+            appendLine(config.author.tagline, 'term-muted');
+            break;
+
+          case 'neofetch':
+            appendLine('  ██  ██     takenaka@takenaka.work', 'term-prompt');
+            appendLine(' ████ ████   ----------------------');
+            appendLine('  ██   ██    Name:     Yuki Takenaka');
+            appendLine('  ██   ██    Role:     Web Engineer');
+            appendLine('  ██  ███    Base:     Tokyo, JP');
+            appendLine('             X:        @y_takenyaka');
+            appendLine('             GitHub:   github.com/takenaka');
+            appendLine('             Edge:     Cloudflare');
+            break;
+
+          case 'contact':
+          case 'links':
+            appendLine('Contact channels:', 'term-ok');
+            config.channels.forEach((ch) => {
+              appendLinkLine(`  [${ch.id.padEnd(6, ' ')}] `, `${ch.handle} (${ch.href})`, ch.href);
+            });
+            break;
+
+          case 'open': {
+            const target = config.channels.find((c) => c.id === arg);
+            if (!target) {
+              appendLine(`open: unknown channel '${arg || ''}'. Try: ${channelIds.map((id) => `open ${id}`).join(' | ')}`, 'term-err');
+            } else {
+              appendLine(`Opening ${target.label} (${target.href})...`, 'term-ok');
+              if (target.external) {
+                window.open(target.href, '_blank', 'noopener,noreferrer');
+              } else {
+                window.location.href = target.href;
+              }
+            }
+            break;
+          }
+
+          case 'copy': {
+            const target = config.channels.find((c) => c.id === arg);
+            if (!target) {
+              appendLine(`copy: unknown channel '${arg || ''}'. Try: ${channelIds.map((id) => `copy ${id}`).join(' | ')}`, 'term-err');
+            } else {
+              await copyText(target.copyValue, target.label);
+              appendLine(`Copied ${target.copyValue} to clipboard.`, 'term-ok');
+            }
+            break;
+          }
+
+          case 'ping':
+            appendLine(`PING ${config.domain} (Cloudflare Anycast): 56 data bytes`, 'term-muted');
+            appendLine(`64 bytes from edge-nrt: icmp_seq=0 ttl=57 time=2.4 ms`, 'term-ok');
+            appendLine(`64 bytes from edge-nrt: icmp_seq=1 ttl=57 time=2.1 ms`, 'term-ok');
+            appendLine(`--- ${config.domain} ping statistics: 2 transmitted, 2 received, 0% loss ---`, 'term-muted');
+            break;
+
+          case 'date': {
+            const now = new Date();
+            appendLine(`JST: ${now.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}`);
+            appendLine(`UTC: ${now.toUTCString()}`, 'term-muted');
+            break;
+          }
+
+          case 'ls':
+            appendLine('README.md   contact.json   channels/', 'term-ok');
+            break;
+
+          case 'cat':
+            if (arg === 'readme.md') {
+              appendLine('# takenaka.work');
+              appendLine('Minimal static hub for Yuki Takenaka. Built with Astro, hosted on Cloudflare.', 'term-muted');
+            } else if (arg === 'contact.json') {
+              const payload = {
+                name: config.author.name,
+                role: config.author.role,
+                channels: Object.fromEntries(config.channels.map((c) => [c.id, c.href])),
+              };
+              appendLine(JSON.stringify(payload, null, 2));
+            } else {
+              appendLine(`cat: ${arg || '(missing file)'}: No such file or directory`, 'term-err');
+            }
+            break;
+
+          case 'theme': {
+            const next = toggleTheme();
+            appendLine(`Theme switched to ${next}.`, 'term-ok');
+            break;
+          }
+
+          case 'sudo':
+            appendLine('takenaka is not in the sudoers file. This incident will be reported.', 'term-warn');
+            break;
+
+          case 'clear':
+            if (terminalScreen) terminalScreen.innerHTML = '';
+            break;
+
+          default:
+            appendLine(`zsh: command not found: ${cmd}. Type 'help' for available commands.`, 'term-err');
+        }
+      };
+
+      terminalForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!terminalInput) return;
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        runCommand(val);
+      });
+
+      terminalInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          if (history.length > 0 && historyIdx > 0) {
+            e.preventDefault();
+            historyIdx -= 1;
+            terminalInput.value = history[historyIdx];
+          }
+        } else if (e.key === 'ArrowDown') {
+          if (history.length > 0) {
+            e.preventDefault();
+            historyIdx = Math.min(history.length, historyIdx + 1);
+            terminalInput.value = history[historyIdx] || '';
+          }
+        } else if (e.key === 'Tab') {
+          e.preventDefault();
+          const current = terminalInput.value.trim().toLowerCase();
+          if (!current) return;
+          const match = commandNames.find((c) => c.startsWith(current));
+          if (match) terminalInput.value = match;
+        }
+      });
+
+      document.querySelectorAll('.chip[data-cmd]').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const cmd = chip.getAttribute('data-cmd');
+          if (cmd) runCommand(cmd);
+        });
+      });
+    })();
+  </script>
+</Layout>

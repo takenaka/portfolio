@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<Layout
+  title={`404 // ${siteConfig.domain}`}
+  description="Requested route was not found."
+>
+  <main class="notfound-wrap">
+    <section class="pane">
+      <div class="pane-header">
+        <span class="pane-title">
+          <span class="pane-index">ERR</span>
+          <span>// 404 NOT FOUND</span>
+        </span>
+        <span class="pane-cmd">ENOENT</span>
+      </div>
+      <div class="pane-body">
+        <p class="term-line term-err">$ cd <span id="missing-path">/404</span></p>
+        <p class="term-line term-muted">
+          bash: cd: <span id="missing-path-err">/404</span>: No such file or directory
+        </p>
+        <p class="identity-bio" style="margin-top: 16px;">
+          The requested page does not exist on <strong>{siteConfig.domain}</strong>.
+        </p>
+        <div class="hero-actions" style="margin-top: 20px;">
+          <a href="/" class="btn btn-primary">
+            <span>$ cd ~</span>
+            <span aria-hidden="true">-&gt;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (() => {
+      const path = window.location.pathname || '/404';
+      const el1 = document.getElementById('missing-path');
+      const el2 = document.getElementById('missing-path-err');
+      if (el1) el1.textContent = path;
+      if (el2) el2.textContent = path;
+    })();
+  </script>
+</Layout>
