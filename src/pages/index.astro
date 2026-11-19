@@ -31,7 +31,7 @@ const clientPayload = {
       <div class="topbar-meta">
         <span class="status-pill" title="Current availability status">
           <span class="status-dot" aria-hidden="true"></span>
-          <span>{siteConfig.author.status}</span>
+          <span class="status-label">{siteConfig.author.status}</span>
         </span>
         <span class="clock" id="jst-clock" aria-label="Japan Standard Time">JST --:--:--</span>
         <button
@@ -41,7 +41,7 @@ const clientPayload = {
           title="Focus terminal (Shortcut: /)"
         >
           <span>&gt;_</span>
-          <span>/</span>
+          <span class="key-hint">/</span>
         </button>
         <button
           type="button"

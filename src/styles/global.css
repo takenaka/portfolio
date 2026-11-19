@@ -129,15 +129,17 @@ textarea {
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px 12px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -228,6 +230,7 @@ textarea {
   margin: 0 auto;
   padding: 28px 20px 44px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   flex: 1;
 }
@@ -866,7 +869,7 @@ textarea {
 /* Responsive */
 @media (max-width: 860px) {
   .split-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .spec-grid {
@@ -875,9 +878,18 @@ textarea {
 }
 
 @media (max-width: 640px) {
+  .topbar-inner {
+    padding: 10px 14px;
+  }
+
   .workspace {
     padding: 16px 14px 32px;
     gap: 16px;
+  }
+
+  .pane-header {
+    flex-wrap: wrap;
+    gap: 2px 12px;
   }
 
   .pane-body {
@@ -908,5 +920,35 @@ textarea {
   .channel-actions {
     grid-column: 1 / -1;
     justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-meta {
+    gap: 6px;
+  }
+
+  .key-hint {
+    display: none;
+  }
+
+  .status-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .status-pill {
+    position: relative;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 359px) {
+  .brand-branch {
+    display: none;
   }
 }
