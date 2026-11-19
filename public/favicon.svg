@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <!-- Split background: cyan left, white right -->
+  <rect x="0" y="0" width="8" height="16" fill="#28A7D3" />
+  <rect x="8" y="0" width="8" height="16" fill="#FFFFFF" />
+  <!-- Black outline of stylized '竹' -->
+  <path
+    d="M1 2h4v2h4V2h4v2h3v5h-2v6H9v-3h1V9H7v6H2V9H0V4h1V2z"
+    fill="#090B0F"
+  />
+  <!-- Left stroke (white) -->
+  <path d="M2 3h2v2h3v3H6v6H3V8H1V5h1V3z" fill="#FFFFFF" />
+  <!-- Right stroke (cyan) -->
+  <path d="M10 3h2v2h3v3h-2v6h-3v-1h1V8H8V5h2V3z" fill="#28A7D3" />
+</svg>

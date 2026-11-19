@@ -1,27 +1,5 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-    "target": "es5",
-    "strict": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "noImplicitThis": true,
-    "strictFunctionTypes": false,
-    "allowJs": true,
-    "baseUrl": "./src",
-    "lib": ["esnext", "dom"],
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "rootDir": "./",
-    "outDir": ".nuxt"
-  },
-  "exclude": [
-    "node_modules",
-    ".nuxt",
-  ]
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }
